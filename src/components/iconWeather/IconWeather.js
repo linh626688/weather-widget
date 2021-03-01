@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { API_ROUTE } from '../constants/ApiRoute';
+import { API_ROUTE } from '../../constants/ApiRoute';
 import { isEmpty } from 'lodash';
 
 function IconWeather({ data, size }) {
@@ -12,7 +12,10 @@ function IconWeather({ data, size }) {
   }, [data]);
   return (
     <div>
-      <img src={`${API_ROUTE.ICONS}/${firstWeather.icon}${size}.png`} alt="" />
+      <img
+        src={`${API_ROUTE.ICONS}/${firstWeather.icon}${size}.png`}
+        alt={firstWeather.icon}
+      />
     </div>
   );
 }

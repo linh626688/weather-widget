@@ -1,16 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import { isEmpty, get, isObject } from 'lodash';
-import IconWeather from './IconWeather';
-import Temperature from './Temperature';
+import IconWeather from '../iconWeather/IconWeather';
+import Temperature from '../temperature/Temperature';
 import {
   AIR_POLLUTION,
   SIZE_IMAGE,
   TIME_FORMAT,
   UNIT,
   UNIT_SPEED,
-} from '../constants/constants';
-import { convertWindDegreeToText } from '../utils/convertUtils';
+} from '../../constants/constants';
+import { convertWindDegreeToText } from '../../utils/convertUtils';
 import PropTypes from 'prop-types';
 
 function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {

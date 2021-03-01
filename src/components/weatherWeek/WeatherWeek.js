@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WeatherItem from './WeatherItem';
+import WeatherItem from '../weatherItem/WeatherItem';
 import { isEmpty } from 'lodash';
 
 function WeatherWeek({ dataInWeek, onChangeSelect, selectedIdx }) {

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import SearchBox from '../../components/SearchBox';
+import SearchBox from '../../components/searchBox/SearchBox';
 import { getRequest } from '../../utils/requestUtils';
 import { API_ROUTE } from '../../constants/ApiRoute';
 import {
@@ -9,10 +9,10 @@ import {
   UNIT,
 } from '../../constants/constants';
 import { isEmpty } from 'lodash';
-import NotFound from '../../components/NotFound';
-import WeatherDate from '../../components/WeatherDate';
-import Loading from '../../components/Loading';
-import WeatherWeek from '../../components/WeatherWeek';
+import NotFound from '../../components/notFound/NotFound';
+import WeatherDate from '../../components/weatherDate/WeatherDate';
+import Loading from '../../components/loading/Loading';
+import WeatherWeek from '../../components/weatherWeek/WeatherWeek';
 import useDebounce from '../../utils/useDebounce';
 
 function WeatherPage() {
@@ -32,6 +32,7 @@ function WeatherPage() {
   useEffect(() => {
     if (debouncedSearchTerm) {
       searchLocationByText(searchText);
+      setSelectedIdx(0);
     }
   }, [debouncedSearchTerm]);
 
@@ -44,6 +45,7 @@ function WeatherPage() {
 
   const searchLocationByText = (searchText) => {
     const url = API_ROUTE.COORDINATES.replace('@q', searchText);
+    setLoading(true);
     getRequest(url)
       .then((res) => {
         if (!isEmpty(res.data)) {
@@ -119,15 +121,11 @@ function WeatherPage() {
       }
     }
   };
-  const onChangeTextSearch = (text) => {
-    setSearchText(text);
-    setSelectedIdx(0);
-  };
 
   return (
     <div>
       {loading && <Loading />}
-      <SearchBox value={searchText} onChange={onChangeTextSearch} />
+      <SearchBox value={searchText} onChange={setSearchText} />
       <div className="shadow-sm p-3 mt-2 mb-5 bg-body rounded">
         {isEmpty(selectedLocation.name) || isEmpty(weatherLocation) ? (
           <NotFound />

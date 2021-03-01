@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import IconWeather from './IconWeather';
-import Temperature from './Temperature';
-import { SIZE_IMAGE, TIME_FORMAT } from '../constants/constants';
+import IconWeather from '../iconWeather/IconWeather';
+import Temperature from '../temperature/Temperature';
+import { SIZE_IMAGE, TIME_FORMAT } from '../../constants/constants';
 
 function WeatherItem({ idx, isSelected, data, onChangeSelect }) {
   return (
