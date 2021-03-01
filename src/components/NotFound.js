@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import NOT_FOUND from './../assets/images/not_found.png'
 
-NotFound.propTypes = {};
-
-function NotFound(props) {
+function NotFound() {
   return (
-    <div>
+    <div className="text-center">
+      <img className="w-25" src={NOT_FOUND} alt=""/>
       <p>We could not find weather information for the location above</p>
     </div>
   );

@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import {API_ROUTE} from "../constants/ApiRoute";
 import {isEmpty} from "lodash";
 
-IconWeather.propTypes = {};
 
-function IconWeather({code, data, size}) {
+function IconWeather({ data, size}) {
   const [firstWeather, setFirstWeather] = useState({icon: '10d'});
   useEffect(() => {
     if (!isEmpty(data)) {
@@ -15,6 +14,14 @@ function IconWeather({code, data, size}) {
   return (
     <div><img src={`${API_ROUTE.ICONS}/${firstWeather.icon}${size}.png`} alt=""/></div>
   );
+}
+IconWeather.propTypes = {
+  data: PropTypes.array.isRequired,
+  size: PropTypes.string.isRequired
+};
+IconWeather.defaultProps = {
+  data: [],
+  size:'',
 }
 
 export default IconWeather;

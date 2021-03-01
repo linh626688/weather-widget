@@ -10,5 +10,14 @@ function Temperature({value, size}) {
     </section>
   );
 }
+Temperature.propTypes = {
+  value: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
+};
+Temperature.defaultProps = {
+  value: 0,
+  size: 10,
+};
+
 
 export default Temperature;

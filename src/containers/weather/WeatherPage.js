@@ -1,39 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
 import SearchBox from "../../components/SearchBox";
 import {getRequest} from "../../utils/requestUtils";
 import {API_ROUTE} from "../../constants/ApiRoute";
-import {defaultLocation, UNIT} from "../../constants/constants";
+import {defaultLocation, defaultWeatherLocation, UNIT} from "../../constants/constants";
 import {isEmpty} from "lodash";
 import NotFound from "../../components/NotFound";
 import WeatherDate from "../../components/WeatherDate";
 import Loading from "../../components/Loading";
 import WeatherWeek from "../../components/WeatherWeek";
+import useDebounce from "../../utils/useDebounce";
 
-WeatherPage.propTypes = {};
-
-
-function WeatherPage({}) {
-
+function WeatherPage() {
   const [searchText, setSearchText] = useState('Hanoi');
   const [unit, setUnit] = useState(UNIT.METRIC);
   const [loading, setLoading] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState(defaultLocation)
-  const [weatherLocation, setWeatherLocation] = useState('')
+  const [weatherLocation, setWeatherLocation] = useState(defaultWeatherLocation)
   const [airPollution, settAirPollution] = useState({})
   const [selectedDate, setSelectedDate] = useState({})
+  const [currentDate, setCurrentDate] = useState({})
+  const [selectedIdx, setSelectedIdx] = useState(0)
+  const debouncedSearchTerm = useDebounce(searchText, 500);
+
 
   useEffect(() => {
-    searchLocationByText(searchText);
-  }, [searchText]);
-
+      if (debouncedSearchTerm) {
+        searchLocationByText(searchText);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [debouncedSearchTerm]
+  );
 
   useEffect(() => {
-    if (!isEmpty(selectedLocation)) {
-      getHistoricalData(selectedLocation, unit);
+    if (!isEmpty(selectedLocation.name)) {
+      getHistoricalData(selectedLocation, unit, 0);
       getAirPollutionData(selectedLocation)
     }
-  }, [selectedLocation, unit])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLocation.name])
 
 
   const searchLocationByText = searchText => {
@@ -42,15 +47,15 @@ function WeatherPage({}) {
       if (!isEmpty(res.data)) {
         setSelectedLocation(res.data[0])
       } else {
-        setSelectedLocation(null)
+        setSelectedLocation({name: ''})
       }
       setLoading(false);
     }).catch(err => {
+      setSelectedLocation({name: ''})
       console.log(err)
     })
   }
-
-  const getHistoricalData = (selectedLocation, unit) => {
+  const getHistoricalData = (selectedLocation, unit, idx) => {
     const url = API_ROUTE.HISTORICAL_DATA
       .replace("@units", unit)
       .replace("@lat", selectedLocation.lat)
@@ -59,9 +64,14 @@ function WeatherPage({}) {
     getRequest(url).then(res => {
       if (!isEmpty(res.data)) {
         setWeatherLocation(res.data)
-        setSelectedDate(res.data.current)
+        setCurrentDate(res.data.current)
+        if (idx !== 0 && !isEmpty(res.data.daily) && res.data.daily[idx]) {
+          setSelectedDate(res.data.daily[idx])
+        } else {
+          setSelectedDate(res.data.current)
+        }
       } else {
-        setWeatherLocation(null)
+        setWeatherLocation({})
       }
       setLoading(false);
 
@@ -93,20 +103,30 @@ function WeatherPage({}) {
 
   const handleChangeUnit = selectedUnit => {
     setUnit(selectedUnit);
+    getHistoricalData(selectedLocation, selectedUnit, selectedIdx);
   }
   const handleChangeDateSelected = idx => {
-    if (!isEmpty(weatherLocation.daily)) {
-      setSelectedDate(weatherLocation.daily[idx])
+    setSelectedIdx(idx);
+    if (idx === 0) {
+      setSelectedDate(currentDate);
+    } else {
+      if (!isEmpty(weatherLocation.daily)) {
+        setSelectedDate(weatherLocation.daily[idx])
+      }
     }
+  }
+  const onChangeTextSearch = text => {
+    setSearchText(text);
+    setSelectedIdx(0)
   }
 
 
   return (
     <div>
       {loading && <Loading/>}
-      <SearchBox value={searchText} onChange={setSearchText}/>
+      <SearchBox value={searchText} onChange={onChangeTextSearch}/>
       <div className="shadow-sm p-3 mt-2 mb-5 bg-body rounded">
-        {isEmpty(selectedLocation) || isEmpty(weatherLocation) ? <NotFound/> :
+        {isEmpty(selectedLocation.name) || isEmpty(weatherLocation) ? <NotFound/> :
           <div>
             <WeatherDate
               location={selectedLocation}
@@ -115,7 +135,10 @@ function WeatherPage({}) {
               airPollution={airPollution}
               onChangeUnit={handleChangeUnit}
             />
-            <WeatherWeek dataInWeek={weatherLocation.daily} onChangeSelect={handleChangeDateSelected}/>
+            <WeatherWeek
+              selectedIdx={selectedIdx}
+              dataInWeek={weatherLocation.daily}
+              onChangeSelect={handleChangeDateSelected}/>
           </div>
         }
       </div>

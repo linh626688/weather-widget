@@ -1,12 +1,11 @@
 import React from 'react';
 import moment from "moment";
-import {isEmpty, get} from "lodash";
+import {isEmpty, get, isObject} from "lodash";
 import IconWeather from "./IconWeather";
 import Temperature from "./Temperature";
-import {AIR_POLLUTION, SIZE_IMAGE, UNIT, UNIT_SPEED} from "../constants/constants";
+import {AIR_POLLUTION, SIZE_IMAGE, TIME_FORMAT, UNIT, UNIT_SPEED} from "../constants/constants";
 import {convertWindDegreeToText} from "../utils/convertUtils";
-
-WeatherDate.propTypes = {};
+import PropTypes from "prop-types";
 
 function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
   const renderOverallDescription = weather => {
@@ -18,11 +17,14 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
   return (
     <div>
       <h3>
-        {location.name} - {location.country}
+        {location.name}, {location.country}
       </h3>
       <div className="d-flex flex-row">
         <div className="p2">
-          {moment(data.dt * 1000).format('dddd hhA')}
+          {moment(data.dt * 1000).format(!isObject(data.temp) ?
+            TIME_FORMAT.WEEK_DAY_APM :
+            TIME_FORMAT.WEEK_DAY)
+          }
         </div>
         <div className="p2">
           <ul>
@@ -34,7 +36,7 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
         <div className="col d-flex flex-row">
           <IconWeather data={data.weather} size={SIZE_IMAGE.LARGE}/>
           <div>
-            <Temperature value={data.temp} size={65}/>
+            <Temperature value={isObject(data.temp) ? get(data.temp, 'max', 0) : data.temp} size={65}/>
           </div>
           <div className="d-flex flex-row unit p-3">
             <div className={`${unit === UNIT.METRIC ? 'selected-unit' : ''} pointer`}
@@ -51,13 +53,13 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
             <span>Humidity</span>: {data.humidity} %
           </div>
           <div>
-            <span>Wind</span>:
+            <span>Wind</span>:&nbsp;
             {data.wind_speed} {unit === UNIT.METRIC ? UNIT_SPEED.KPH : UNIT_SPEED.MPH}
             &nbsp; {convertWindDegreeToText(data.wind_deg)}
           </div>
-          {!isEmpty(airPollution) &&
+          {!isEmpty(airPollution) && !isObject(data.temp) &&
           <div>
-            <span>Air Quality</span>: {AIR_POLLUTION[get(airPollution, 'list[0].main.aqi', 0)]}
+            <span>Air Quality</span>:&nbsp;{AIR_POLLUTION[get(airPollution, 'list[0].main.aqi', 0)]}
           </div>
           }
         </div>
@@ -66,5 +68,13 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
     </div>
   );
 }
+
+WeatherDate.propTypes = {
+  location: PropTypes.object,
+  data: PropTypes.object,
+  unit: PropTypes.string.isRequired,
+  onChangeUnit: PropTypes.func.isRequired,
+  airPollution: PropTypes.object,
+};
 
 export default WeatherDate;

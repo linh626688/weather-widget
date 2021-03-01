@@ -1,5 +1,4 @@
 .App {
-    /*text-align: center;*/
     margin: 20px;
 }
 
@@ -37,7 +36,7 @@
         transform: rotate(360deg);
     }
 }
-
+/*style Spinner*/
 .spinner {
     height: 60px;
     width: 60px;
@@ -104,7 +103,7 @@
 }
 
 
-/*temperature*/
+/*style format temperature*/
 #current-temp {
     margin-top: 0;
     font-size: 2em;
@@ -115,6 +114,7 @@
     content: "°";
 }
 
+/*style unit*/
 .unit {
     font-weight: 300;
     font-size: 20px;
@@ -127,4 +127,13 @@
 
 .pointer {
     cursor: pointer;
+}
+
+/*style selected weatherItem*/
+.selected-box {
+    background: #cccccc;
+}
+
+.not-found-img {
+    width: 50%;
 }
