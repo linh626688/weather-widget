@@ -1,18 +1,24 @@
 import React from 'react';
-import moment from "moment";
-import {isEmpty, get, isObject} from "lodash";
-import IconWeather from "./IconWeather";
-import Temperature from "./Temperature";
-import {AIR_POLLUTION, SIZE_IMAGE, TIME_FORMAT, UNIT, UNIT_SPEED} from "../constants/constants";
-import {convertWindDegreeToText} from "../utils/convertUtils";
-import PropTypes from "prop-types";
+import moment from 'moment';
+import { isEmpty, get, isObject } from 'lodash';
+import IconWeather from './IconWeather';
+import Temperature from './Temperature';
+import {
+  AIR_POLLUTION,
+  SIZE_IMAGE,
+  TIME_FORMAT,
+  UNIT,
+  UNIT_SPEED,
+} from '../constants/constants';
+import { convertWindDegreeToText } from '../utils/convertUtils';
+import PropTypes from 'prop-types';
 
-function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
-  const renderOverallDescription = weather => {
+function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
+  const renderOverallDescription = (weather) => {
     if (!isEmpty(weather)) {
-      return weather.map((el, idx) => <li key={idx}>{el.main}</li>)
+      return weather.map((el, idx) => <li key={idx}>{el.main}</li>);
     }
-  }
+  };
 
   return (
     <div>
@@ -21,30 +27,42 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
       </h3>
       <div className="d-flex flex-row">
         <div className="p2">
-          {moment(data.dt * 1000).format(!isObject(data.temp) ?
-            TIME_FORMAT.WEEK_DAY_APM :
-            TIME_FORMAT.WEEK_DAY)
-          }
+          {moment(data.dt * 1000).format(
+            !isObject(data.temp)
+              ? TIME_FORMAT.WEEK_DAY_APM
+              : TIME_FORMAT.WEEK_DAY
+          )}
         </div>
         <div className="p2">
-          <ul>
-            {renderOverallDescription(data.weather)}
-          </ul>
+          <ul>{renderOverallDescription(data.weather)}</ul>
         </div>
       </div>
       <div className="row">
         <div className="col d-flex flex-row">
-          <IconWeather data={data.weather} size={SIZE_IMAGE.LARGE}/>
+          <IconWeather data={data.weather} size={SIZE_IMAGE.LARGE} />
           <div>
-            <Temperature value={isObject(data.temp) ? get(data.temp, 'max', 0) : data.temp} size={65}/>
+            <Temperature
+              value={isObject(data.temp) ? get(data.temp, 'max', 0) : data.temp}
+              size={65}
+            />
           </div>
           <div className="d-flex flex-row unit p-3">
-            <div className={`${unit === UNIT.METRIC ? 'selected-unit' : ''} pointer`}
-                 onClick={() => onChangeUnit(UNIT.METRIC)}>C
+            <div
+              className={`${
+                unit === UNIT.METRIC ? 'selected-unit' : ''
+              } pointer`}
+              onClick={() => onChangeUnit(UNIT.METRIC)}
+            >
+              C
             </div>
             <div className="pr-1 pl-1">/</div>
-            <div className={`${unit === UNIT.IMPERIAL ? 'selected-unit' : ''} pointer`}
-                 onClick={() => onChangeUnit(UNIT.IMPERIAL)}>F
+            <div
+              className={`${
+                unit === UNIT.IMPERIAL ? 'selected-unit' : ''
+              } pointer`}
+              onClick={() => onChangeUnit(UNIT.IMPERIAL)}
+            >
+              F
             </div>
           </div>
         </div>
@@ -54,16 +72,17 @@ function WeatherDate({location, data, unit, onChangeUnit, airPollution}) {
           </div>
           <div>
             <span>Wind</span>:&nbsp;
-            {data.wind_speed} {unit === UNIT.METRIC ? UNIT_SPEED.KPH : UNIT_SPEED.MPH}
+            {data.wind_speed}{' '}
+            {unit === UNIT.METRIC ? UNIT_SPEED.KPH : UNIT_SPEED.MPH}
             &nbsp; {convertWindDegreeToText(data.wind_deg)}
           </div>
-          {!isEmpty(airPollution) && !isObject(data.temp) &&
-          <div>
-            <span>Air Quality</span>:&nbsp;{AIR_POLLUTION[get(airPollution, 'list[0].main.aqi', 0)]}
-          </div>
-          }
+          {!isEmpty(airPollution) && !isObject(data.temp) && (
+            <div>
+              <span>Air Quality</span>:&nbsp;
+              {AIR_POLLUTION[get(airPollution, 'list[0].main.aqi', 0)]}
+            </div>
+          )}
         </div>
-
       </div>
     </div>
   );

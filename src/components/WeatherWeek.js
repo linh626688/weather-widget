@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WeatherItem from "./WeatherItem";
-import {isEmpty} from "lodash";
+import WeatherItem from './WeatherItem';
+import { isEmpty } from 'lodash';
 
-
-function WeatherWeek({dataInWeek, onChangeSelect, selectedIdx}) {
+function WeatherWeek({ dataInWeek, onChangeSelect, selectedIdx }) {
   return (
     <div className="d-flex flex-row">
-      {!isEmpty(dataInWeek) && dataInWeek.map((el, idx) => (
+      {!isEmpty(dataInWeek) &&
+        dataInWeek.map((el, idx) => (
           <WeatherItem
             key={idx}
             isSelected={selectedIdx === idx}
@@ -15,11 +15,8 @@ function WeatherWeek({dataInWeek, onChangeSelect, selectedIdx}) {
             data={el}
             onChangeSelect={onChangeSelect}
           />
-        )
-      )
-      }
+        ))}
     </div>
-
   );
 }
 WeatherWeek.propTypes = {
