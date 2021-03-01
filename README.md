@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Coding Test
+
+## Weather Widget
+
+This is a simple page using the following technologies
+
+- JavaScript Framework: ReactJS
+- HTML/CSS
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+Need Node.js and Yarn installed on your environment.
 
-### `yarn start`
+### Node
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    $ node --version
+    v12.16.3
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    $ yarn --version
+    >=1.22.4
 
-### `yarn test`
+## Install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    $ cd PROJECT
+    $ yarn install
 
-### `yarn build`
+## Start & watch
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    $ yarn start
+    
+    Runs the app in the development mode.
+    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Testing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    $ yarn test
+## Lint and fix
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    $ yarn lint:fix
 
-### `yarn eject`
+    
+## Languages & dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### JavaScript
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [React](http://facebook.github.io/react) is used for UI.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Bootstrap](https://getbootstrap.com/)  CSS framework base
+- [Lodash](https://lodash.com/)  JavaScript utility library delivering modularity, performance & extras
+- [Moment](https://momentjs.com/)  Parse, validate, manipulate, and display dates in javascript.
+- [React-Error-Boundary](https://github.com/bvaughn/react-error-boundary)   React error boundary component
+- [Prettier](https://prettier.io/) & [ESLint](https://eslint.org/)   Formatting & Linting errors 
+- [Axios](https://github.com/axios/axios)  Promise based HTTP client for the browser
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Reference
+- Formula converting wind direction to text words form [stackoverflow](https://stackoverflow.com/questions/7490660/converting-wind-direction-in-angles-to-text-words)
+- [use-react-error-boundary](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react)
