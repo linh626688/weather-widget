@@ -58,4 +58,9 @@ Need Node.js and Yarn installed on your environment.
 
 ### Reference
 - Formula converting wind direction to text words form [stackoverflow](https://stackoverflow.com/questions/7490660/converting-wind-direction-in-angles-to-text-words)
-- [use-react-error-boundary](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react)
+- [use-react-error-boundary](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) quick handle Error Boundary on React
+
+### Note
+- _useDebounce_ is a custom hook, avoid execute too frequently function callAPI search, it's not necessary and bad performance to the server.
+  Debounce will delay 500ms to execute search when user typing. 
+- _Loading_ effect will appear on the screen when executing search function. This effect disappears after call API finish. Make user have better UX on the Webpage

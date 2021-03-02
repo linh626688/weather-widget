@@ -11,7 +11,7 @@ function SearchBox({ onChange, value }) {
       <input
         type="search"
         placeholder="Location/City to search"
-        className="form-control"
+        className="form-control text-search"
         onChange={handleChangeInput}
         name="input"
         value={value}

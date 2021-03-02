@@ -4,8 +4,10 @@ import NOT_FOUND from '../../assets/images/not_found.png';
 function NotFound() {
   return (
     <div className="text-center">
-      <img className="w-25" src={NOT_FOUND} alt="" />
-      <p>We could not find weather information for the location above</p>
+      <img src={NOT_FOUND} alt="NOT_FOUND" />
+      <p className="not-found-text">
+        We could not find weather information for the location above
+      </p>
     </div>
   );
 }

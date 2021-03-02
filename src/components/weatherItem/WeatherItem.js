@@ -12,10 +12,12 @@ function WeatherItem({ idx, isSelected, data, onChangeSelect }) {
       onClick={() => onChangeSelect(idx)}
     >
       <div className="text-center p-2">
-        {moment(data.dt * 1000).format(TIME_FORMAT.WEEK_DAY)}
+        <p className="temp-in-week">
+          {moment(data.dt * 1000).format(TIME_FORMAT.WEEK_DAY_SHORT)}
+        </p>
         <IconWeather data={data.weather} size={SIZE_IMAGE.NORMAL} />
-        <Temperature value={data.temp && data.temp.max} size={20} />
-        <Temperature value={data.temp && data.temp.min} size={12} />
+        <Temperature value={data.temp && data.temp.max} size={18} />
+        <Temperature value={data.temp && data.temp.min} size={14} />
       </div>
     </div>
   );

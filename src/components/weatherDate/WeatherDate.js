@@ -22,10 +22,10 @@ function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
 
   return (
     <div>
-      <h3 data-testid="location">
+      <div data-testid="location" className="location">
         {location.name}, {location.country}
-      </h3>
-      <div className="d-flex flex-row">
+      </div>
+      <div className="d-flex flex-row time-detail">
         <div className="p2">
           {moment(data.dt * 1000).format(
             !isObject(data.temp)
@@ -46,7 +46,7 @@ function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
               size={65}
             />
           </div>
-          <div className="d-flex flex-row unit p-3">
+          <div className="d-flex flex-row unit pt-4 pl-2">
             <div
               className={`${
                 unit === UNIT.METRIC ? 'selected-unit' : ''
@@ -66,7 +66,7 @@ function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
             </div>
           </div>
         </div>
-        <div className="col">
+        <div className="col p-4 label-value">
           <div>
             <span>Humidity</span>: {data.humidity} %
           </div>

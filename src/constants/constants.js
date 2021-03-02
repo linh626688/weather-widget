@@ -63,5 +63,6 @@ export const SIZE_IMAGE = {
 };
 export const TIME_FORMAT = {
   WEEK_DAY: 'dddd',
+  WEEK_DAY_SHORT: 'ddd',
   WEEK_DAY_APM: 'dddd hhA',
 };

@@ -1,5 +1,6 @@
 .App {
-    margin: 20px;
+    margin: 87px 0 0 43px;
+    width: 590px;
 }
 
 .App-logo {
@@ -106,9 +107,10 @@
 
 /*style format temperature*/
 #current-temp {
-    margin-top: 0;
-    font-size: 2em;
+    font-style: normal;
     font-weight: bold;
+    font-size: 44px;
+    color: #000000;
 }
 
 #current-temp:after {
@@ -117,13 +119,16 @@
 
 /*style unit*/
 .unit {
-    font-weight: 300;
-    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #888888;
 }
 
 .selected-unit {
     text-decoration: underline;
-    font-weight: bold;
+    color: #000000;
 }
 
 .pointer {
@@ -132,9 +137,45 @@
 
 /*style selected weatherItem*/
 .selected-box {
-    background: #cccccc;
+    background: #F7F7F7;
 }
 
-.not-found-img {
-    width: 50%;
+
+/*search box*/
+.text-search {
+    font-size: 18px !important;
+    line-height: 21px !important;
+}
+
+/*WeatherDate.js*/
+.location {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #333333;
+}
+
+.time-detail {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #666666;
+}
+
+.label-value {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #222222;
+}
+
+/*NotFound*/
+.not-found-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
 }
