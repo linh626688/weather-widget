@@ -21,7 +21,7 @@ function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
   };
 
   return (
-    <div>
+    <div className="p-3">
       <div data-testid="location" className="location">
         {location.name}, {location.country}
       </div>
