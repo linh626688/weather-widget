@@ -38,6 +38,14 @@
     }
 }
 
+/*WeatherPage*/
+.weather-box {
+    border: 1px solid rgba(150, 150, 150, 0.3);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    background: #FFFFFF;
+}
+
 /*style Spinner*/
 .spinner {
     height: 60px;

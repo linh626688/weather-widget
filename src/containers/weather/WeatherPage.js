@@ -126,7 +126,7 @@ function WeatherPage() {
     <div>
       {loading && <Loading />}
       <SearchBox value={searchText} onChange={setSearchText} />
-      <div className="shadow-sm p-3 mt-2 mb-5 bg-body rounded">
+      <div className="weather-box p-3 mt-2 mb-5 bg-body rounded">
         {isEmpty(selectedLocation.name) || isEmpty(weatherLocation) ? (
           <NotFound />
         ) : (
