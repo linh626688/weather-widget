@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Requirements
 
-Need Node.js and Yarn installed on your environment.
+Need Node.js and Yarn installed on your environment. (_OS: Ubuntu 20.04 (Optional)_)
 
 ### Node
 
