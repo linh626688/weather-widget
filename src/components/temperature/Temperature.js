@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 function Temperature({ value, size }) {
   return (
     <section>
-      <span id="current-temp" style={{ fontSize: size }}>
+      <span
+        id="current-temp"
+        data-testid="current-temp"
+        style={{ fontSize: size }}
+      >
         {value}
       </span>
     </section>

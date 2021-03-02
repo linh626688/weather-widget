@@ -22,7 +22,7 @@ function WeatherDate({ location, data, unit, onChangeUnit, airPollution }) {
 
   return (
     <div>
-      <h3>
+      <h3 data-testid="location">
         {location.name}, {location.country}
       </h3>
       <div className="d-flex flex-row">
